@@ -4,6 +4,7 @@
 #include <string>
 #include <random>
 #include <conio.h>
+#include <iostream>
 
 void Chip8::LoadROM(char const* name) {
 	// Open the file as a stream of binary and move the file pointer to the end
@@ -68,6 +69,9 @@ void Chip8::decode_and_execute() {
 					sp--;
 					pc = stack[sp];
 					break;
+				default:
+					std::cout << "ERROR, CODE IS: %d", opcode;
+					break;
 			}
 			break;
 		case 0x1:
@@ -127,6 +131,9 @@ void Chip8::decode_and_execute() {
 					registers[0xF] = 0x1 & registers[x];
 					registers[x] <<= 1;
 					break;
+				default:
+					std::cout << "ERROR, CODE IS: %d", opcode;
+					break;
 			}
 			break;
 		case 0x9:
@@ -178,6 +185,9 @@ void Chip8::decode_and_execute() {
 					if (!keypad[registers[x]])
 						pc += 2;
 					break;
+				default:
+					std::cout << "ERROR, CODE IS: %d", opcode;
+					break;
 			}
 			break;
 		case 0xF:
@@ -217,25 +227,30 @@ void Chip8::decode_and_execute() {
 				case 0x33:
 				{
 					int num = registers[x];
-					int i = 2;
-					while (num) { // loop till there's nothing left
-						memory[index_register + i] = n % 10; // assign the last digit
-						i--;
-						num /= 10; // "right shift" the number
-					}
+					memory[index_register + 2] = num % 10;
+					num /= 10;
+					memory[index_register + 1] = num % 10;
+					num /= 10;
+					memory[index_register] = num % 10;
 					break;
 				}
 				case 0x55:
-					for (int i = 0; i <= registers[x]; i++) {
+					for (int i = 0; i <= x; i++) {
 						memory[index_register + i] = registers[i];
 					}
 					break;
 				case 0x65:
-					for (int i = 0; i <= registers[x]; i++) {
+					for (int i = 0; i <= x; i++) {
 						registers[i] = memory[index_register + i];
 					}
 					break;
+				default:
+					std::cout << "ERROR, CODE IS: %d", opcode;
+					break;
 			}
+			break;
+		default:
+			std::cout << "ERROR, CODE IS: %d", opcode;
 			break;
 	}
 }

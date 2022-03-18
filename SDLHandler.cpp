@@ -18,126 +18,119 @@ void SDLHandler::update(void const* buffer, int pitch)
 
 bool SDLHandler::process_input(uint8_t* keys) {
     bool quit = false;
-    while (!quit) {
-
-        /* Poll for events */
-        while (SDL_PollEvent(&event)) {
-
-            switch (event.type) {
-                /* Keyboard event */
-                /* Pass the event data onto PrintKeyInfo() */
-                case SDL_KEYDOWN:
-                    switch (event.key.keysym.sym) {
-                        case SDLK_x:
-                            keys[0] = 1;
-                            break;
-                        case SDLK_1:
-                            keys[1] = 1;
-                            break;
-                        case SDLK_2:
-                            keys[2] = 1;
-                            break;
-                        case SDLK_3:
-                            keys[3] = 1;
-                            break;
-                        case SDLK_q:
-                            keys[4] = 1;
-                            break;
-                        case SDLK_w:
-                            keys[5] = 1;
-                            break;
-                        case SDLK_e:
-                            keys[6] = 1;
-                            break;
-                        case SDLK_a:
-                            keys[7] = 1;
-                            break;
-                        case SDLK_s:
-                            keys[8] = 1;
-                            break;
-                        case SDLK_d:
-                            keys[9] = 1;
-                            break;
-                        case SDLK_z:
-                            keys[10] = 1;
-                            break;
-                        case SDLK_c:
-                            keys[11] = 1;
-                            break;
-                        case SDLK_4:
-                            keys[12] = 1;
-                            break;
-                        case SDLK_r:
-                            keys[13] = 1;
-                            break;
-                        case SDLK_f:
-                            keys[14] = 1;
-                            break;
-                        case SDLK_v:
-                            keys[15] = 1;
-                            break;
-                    }
-                    break;
-                case SDL_KEYUP:
-                    switch (event.key.keysym.sym) {
+    /* Poll for events */
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
+            /* Keyboard event */
+            /* Pass the event data onto PrintKeyInfo() */
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym) {
                     case SDLK_x:
-                        keys[0] = 0;
+                        keys[0] = 1;
                         break;
                     case SDLK_1:
-                        keys[1] = 0;
+                        keys[1] = 1;
                         break;
                     case SDLK_2:
-                        keys[2] = 0;
+                        keys[2] = 1;
                         break;
                     case SDLK_3:
-                        keys[3] = 0;
+                        keys[3] = 1;
                         break;
                     case SDLK_q:
-                        keys[4] = 0;
+                        keys[4] = 1;
                         break;
                     case SDLK_w:
-                        keys[5] = 0;
+                        keys[5] = 1;
                         break;
                     case SDLK_e:
-                        keys[6] = 0;
+                        keys[6] = 1;
                         break;
                     case SDLK_a:
-                        keys[7] = 0;
+                        keys[7] = 1;
                         break;
                     case SDLK_s:
-                        keys[8] = 0;
+                        keys[8] = 1;
                         break;
                     case SDLK_d:
-                        keys[9] = 0;
+                        keys[9] = 1;
                         break;
                     case SDLK_z:
-                        keys[10] = 0;
+                        keys[10] = 1;
                         break;
                     case SDLK_c:
-                        keys[11] = 0;
+                        keys[11] = 1;
                         break;
                     case SDLK_4:
-                        keys[12] = 0;
+                        keys[12] = 1;
                         break;
                     case SDLK_r:
-                        keys[13] = 0;
+                        keys[13] = 1;
                         break;
                     case SDLK_f:
-                        keys[14] = 0;
+                        keys[14] = 1;
                         break;
                     case SDLK_v:
-                        keys[15] = 0;
+                        keys[15] = 1;
                         break;
-                    }
+                }
+                break;
+            case SDL_KEYUP:
+                switch (event.key.keysym.sym) {
+                case SDLK_x:
+                    keys[0] = 0;
                     break;
-                /* SDL_QUIT event (window close) */
-                case SDL_QUIT:
-                    quit = true;
+                case SDLK_1:
+                    keys[1] = 0;
                     break;
-
-                default:
+                case SDLK_2:
+                    keys[2] = 0;
                     break;
-            }
+                case SDLK_3:
+                    keys[3] = 0;
+                    break;
+                case SDLK_q:
+                    keys[4] = 0;
+                    break;
+                case SDLK_w:
+                    keys[5] = 0;
+                    break;
+                case SDLK_e:
+                    keys[6] = 0;
+                    break;
+                case SDLK_a:
+                    keys[7] = 0;
+                    break;
+                case SDLK_s:
+                    keys[8] = 0;
+                    break;
+                case SDLK_d:
+                    keys[9] = 0;
+                    break;
+                case SDLK_z:
+                    keys[10] = 0;
+                    break;
+                case SDLK_c:
+                    keys[11] = 0;
+                    break;
+                case SDLK_4:
+                    keys[12] = 0;
+                    break;
+                case SDLK_r:
+                    keys[13] = 0;
+                    break;
+                case SDLK_f:
+                    keys[14] = 0;
+                    break;
+                case SDLK_v:
+                    keys[15] = 0;
+                    break;
+                }
+                break;
+            /* SDL_QUIT event (window close) */
+            case SDL_QUIT:
+                quit = true;
+                break;
         }
     }
     /* Clean up */
