@@ -12,9 +12,8 @@ private:
 	uint8_t sp{};
 	uint8_t keypad[16]{};
 	uint16_t opcode;
-	const static unsigned int SCREEN_WIDTH = 64;
-	const static unsigned int SCREEN_HEIGHT = 32;
-	uint32_t screen[SCREEN_HEIGHT * SCREEN_WIDTH]{};
+	int SCREEN_WIDTH;
+	int SCREEN_HEIGHT;
 	const unsigned int FONTSET_START_ADDRESS = 0x50;
 	const static unsigned int FONTSET_SIZE = 80;
 	const unsigned int CODE_START_ADDRESS = 0x200;
@@ -39,7 +38,8 @@ private:
 		0xF0, 0x80, 0xF0, 0x80, 0x80  // F
 	};
 public:
-	void initialize() {
+	uint32_t screen[64 * 32];
+	void initialize(int width, int height) {
 		this->pc = CODE_START_ADDRESS;
 		this->opcode = 0;
 		this->index_register = 0;
@@ -48,6 +48,8 @@ public:
 		for (int i = 0; i < FONTSET_SIZE; i++) {
 			memory[FONTSET_START_ADDRESS + i] = fontset[i];
 		}
+		SCREEN_HEIGHT = height;
+		SCREEN_WIDTH = width;
 	}
 
 	void cycle();
