@@ -5,16 +5,24 @@
 #include <string>
 #include <chrono>
 #include <thread>
+#include <iostream>
 
 Chip8 chip8;
 SDLHandler graphics;
 int main(int argc, char* args[]) {
-    if (argc < 3) {
+    int SCALE_FACTOR = 20;
+    int CYCLE_DELAY = 1;
+    if (argc < 2) {
+        std::cout << "Usage: <path> <scale_factor> <cycle_delay>";
         return 0;
     }
+    if (argc > 2) {
+        SCALE_FACTOR = std::stoi(args[2]);
+    }
+    if (argc > 3) {
+        CYCLE_DELAY = std::stoi(args[3]);
+    }
     char* filename = args[1];
-    int SCALE_FACTOR = std::stoi(args[2]);
-    int CYCLE_DELAY = 1;
     int SCREEN_WIDTH = 64;
     int SCREEN_HEIGHT = 32;
     chip8.initialize(SCREEN_WIDTH, SCREEN_HEIGHT);
