@@ -3,6 +3,7 @@
 #include "Chip8.h"
 #include "SDLHandler.h"
 #include <string>
+#include <chrono>
 
 Chip8 chip8;
 SDLHandler graphics;
@@ -18,8 +19,12 @@ int main(int argc, char* args[]) {
     chip8.LoadROM(filename);
     graphics.initialize("My Emulator", SCREEN_WIDTH, SCREEN_HEIGHT, SCALE_FACTOR);
     bool quit = true;
+    auto lastCycleTime = std::chrono::high_resolution_clock::now();
+
     int pitch = sizeof(chip8.screen[0]) * SCREEN_WIDTH;
     while (quit) {
+        graphics.process_input(chip8.keypad);
+        auto currentTime = std::chrono::high_resolution_clock::now();
         chip8.cycle();
         graphics.update(chip8.screen, pitch);
     }

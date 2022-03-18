@@ -10,7 +10,6 @@ private:
 	uint8_t delay_timer{};
 	uint8_t sound_timer{};
 	uint8_t sp{};
-	uint8_t keypad[16]{};
 	uint16_t opcode;
 	int SCREEN_WIDTH;
 	int SCREEN_HEIGHT;
@@ -39,6 +38,7 @@ private:
 	};
 public:
 	uint32_t screen[64 * 32];
+	uint8_t keypad[16]{};
 	void initialize(int width, int height) {
 		this->pc = CODE_START_ADDRESS;
 		this->opcode = 0;
